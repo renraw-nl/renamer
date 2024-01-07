@@ -10,6 +10,18 @@ description = "Batch rename files, similar to what IrfanView does"
 authors = ["Warner Leijenaar <git@renraw.nl>"]
 license = "MIT"
 readme = "README.md"
+# packages = [
+#   {include = "src"},
+#   # {include = "renamer/py.typed", from = "src"},
+# ]
+
+
+[tool.poetry.urls]
+"Homepage" = "https://github.com/renraw-nl/renamer"
+
+
+[tool.poetry.scripts]
+renamer = 'renamer.cli.__main__:main'
 
 
 [tool.poetry.dependencies]
@@ -20,7 +32,7 @@ mawk = "^0.1.4"
 result = "^0.16.0"
 rich = "^13.7.0"
 rich-argparse = "^1.4.0"
-tqdm = "^4.66.1"
+pendulum = "^3.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -35,6 +47,11 @@ ruff = "^0.1.11"
 hypothesis = "^6.92.2"
 pytest = "^7.4.4"
 pytest-mock = "^3.12.0"
+
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.5.3"
+pymarkdownlnt = "^0.9.15"
 
 
 [tool.poetry-dynamic-versioning]
@@ -56,7 +73,7 @@ markers = [
 
 
 [tool.black]
-line-length = 88
+line-length = 79
 target-version = ["py311"]
 exclude = '''
 /(
@@ -111,18 +128,15 @@ color = true
 [tool.ruff]
 select = ["E", "F"]
 ignore = []
-line-length = 88
-
+line-length = 79
 
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
-target-version = "py311"
-
+target-version = "py312"
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
 fixable = ["A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE", "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"]
 unfixable = []
-
 
 # Exclude a variety of commonly ignored directories.
 exclude = [
@@ -148,6 +162,11 @@ exclude = [
     "node_modules",
     "venv",
 ]
+
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 70
 
 
 [tool.ruff.mccabe]
