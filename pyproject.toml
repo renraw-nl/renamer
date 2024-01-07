@@ -36,9 +36,7 @@ pendulum = "^3.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.12.1"
 interrogate = "^1.5.0"
-isort = "^5.13.2"
 pre-commit = "^3.6.0"
 ruff = "^0.1.11"
 
@@ -72,37 +70,6 @@ markers = [
 ]
 
 
-[tool.black]
-line-length = 79
-target-version = ["py311"]
-exclude = '''
-/(
-   \.git
-  | \.mypy_cache
-  | \.pytest_cache
-  | \.ruff_cache
-  | \.venv
-  | \.vscode
-  | build
-  | dist
-  | var
-)/
-'''
-
-
-[tool.isort]
-combine_as_imports = true
-force_grid_wrap = 0
-include_trailing_comma = true
-known_first_party = "builder, tests"
-line_length = 88
-multi_line_output = 3
-no_lines_before = "LOCALFOLDER"
-order_by_type = false
-reverse_relative = true
-profile = "black"
-
-
 [tool.interrogate]
 ignore-init-method = true
 ignore-init-module = false
@@ -129,10 +96,13 @@ color = true
 select = ["E", "F"]
 ignore = []
 line-length = 79
+target-version = "py312"
 
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
-target-version = "py312"
+
+# Note: Ruff supports a top-level `src` option in lieu of isort's `src_paths` setting.
+src = ["src", "tests"]
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
 fixable = ["A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE", "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"]
@@ -146,13 +116,16 @@ exclude = [
     ".git",
     ".git-rewrite",
     ".hg",
+    ".idea",
     ".mypy_cache",
     ".nox",
     ".pants.d",
     ".pytype",
+    ".pytest_cache",
     ".ruff_cache",
     ".svn",
     ".tox",
+    ".vscode",
     ".venv",
     "__pypackages__",
     "_build",
@@ -160,6 +133,7 @@ exclude = [
     "build",
     "dist",
     "node_modules",
+    "var",
     "venv",
 ]
 
@@ -168,10 +142,26 @@ exclude = [
 docstring-code-format = true
 docstring-code-line-length = 70
 
-
 [tool.ruff.mccabe]
 # Unlike Flake8, default to a complexity level of 10.
 max-complexity = 10
+
+[tool.ruff.lint]
+select = [
+    # Pyflakes
+    "F",
+    # Pycodestyle
+    "E",
+    "W",
+    # isort
+    "I001"
+]
+
+# [tool.ruff.lint.isort]
+# known-first-party = ["my_module1", "my_module2"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"  # Accepts: "google", "numpy", or "pep257".
 
 
 # pymarkdownlnt configuration (yes both are correct
