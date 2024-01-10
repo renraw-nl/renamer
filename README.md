@@ -4,7 +4,7 @@ A CLI renamer similar to what IrfanView can do, written in python.
 
 ## References
 
-- [IrfanView](https://easyfilerenamer.com/blog/2017/01/18/rename-irfanview-photos-files-in-bulk/) -- Batch file renamer concept
+- [Total Commander's multi-rename tool](https://www.ghisler.ch/wiki/index.php/Multi-rename_tool)
 - [Entangled.py](https://github.com/entangled/entangled.py/) -- packages and basic setup
 - Too simple MacOS [rename finder option](https://allthings.how/how-to-batch-rename-multiple-files-on-mac/)
 - ...
@@ -13,8 +13,9 @@ A CLI renamer similar to what IrfanView can do, written in python.
 
 - [argh](https://argh.readthedocs.io/en/latest/)
 - [rich](https://rich.readthedocs.io/en/stable/index.html)
-- filelock
-- mawk
+- [pyparsing](https://github.com/pyparsing/pyparsing)
+    - [diagram](https://github.com/tabatkins/railroad-diagrams/blob/gh-pages/README-py.md)
+- [filelock](https://py-filelock.readthedocs.io/en/latest/index.html)
 - ...
 
 ## (Planned) Use
